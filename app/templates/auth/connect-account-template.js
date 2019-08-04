@@ -11,7 +11,7 @@ export default function() {
                 </div>
                 <div>
                     <label>Client Secret</label>
-                    <input type="text" name="client_secret" placeholder="Client Secret">
+                    <input type="password" name="client_secret" placeholder="Client Secret">
                 </div>
                 <button data-role="submit-button">Connect</button>
             </form>
