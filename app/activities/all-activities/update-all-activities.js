@@ -10,6 +10,8 @@ export default function(rootElement, form) {
 
     const requestBody = updateActivity(form);
 
+    const waitFor = (ms) => new Promise(r => setTimeout(r, ms));
+
     async function asyncForEach(array, callback) {
         for (let index = 0; index < array.length; index++) {
             await callback(array[index], index, array);
@@ -18,7 +20,8 @@ export default function(rootElement, form) {
 
     async function start() {
         await asyncForEach(rootElement.view.activitiesData, async (activity, index) => {
-            await updateActivityData(rootElement, requestBody, activity.id)
+            await waitFor(20);
+            // await updateActivityData(rootElement, requestBody, activity.id)
 
             updateProgressBar(progressBar, index + 1, rootElement.view.activitiesData.length, false);
         });
