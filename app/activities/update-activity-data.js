@@ -11,7 +11,6 @@ export default async function(rootElement, requestBody, activityId) {
     };
 
     let response = await fetch(requestUrl, settings);
-    console.log(response)
     let data = await response.json()
     return data;
 

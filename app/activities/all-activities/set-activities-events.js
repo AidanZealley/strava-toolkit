@@ -1,9 +1,7 @@
 import getActivitiesData from './get-activities-data';
 import updateAllActivities from './update-all-activities';
 
-export default function(rootElement) {
-
-    const getAllActivitiesButton = rootElement.querySelector('[data-role="get-all-activities-button"]');
+export default async function(rootElement) {
 
     const updateAllCommuteForm = rootElement.querySelector('[data-role="update-all-commute-form"]');
     const updateAllCommuteButton = updateAllCommuteForm.querySelector('[data-role="submit-button"]');
@@ -22,10 +20,6 @@ export default function(rootElement) {
 
     const updateAllGearForm = rootElement.querySelector('[data-role="update-all-gear-form"]');
     const updateAllGearButton = updateAllGearForm.querySelector('[data-role="submit-button"]');
-
-    getAllActivitiesButton.onclick = function(e) {    
-        getActivitiesData(rootElement);
-    }
 
     function updateAll(form) {
         event.preventDefault();

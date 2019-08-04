@@ -1,7 +1,7 @@
 import getActivityData from './get-activity-data';
-import updateActivityData from './update-activity-data';
-import populateUpdateActivityForm from './ui/populate-update-activity-form';
-import updateActivity from './update-activity';
+import updateActivityData from '../update-activity-data';
+import populateUpdateActivityForm from '../../ui/populate-update-activity-form';
+import updateActivity from '../update-activity';
 
 export default function(rootElement) {
 
@@ -28,7 +28,7 @@ export default function(rootElement) {
 
             if (requestBody) {
                 updateActivityData(rootElement, requestBody, rootElement.view.currentActivity.id)
-                .then(console.log('updated activity'))
+                .then(console.log('Updated activity'))
                 .catch(function(err) {
                     console.log(err)
                 });

@@ -1,13 +1,16 @@
-import setTokenEvents from './set-token-events';
-import setActivitiesEvents from './set-activities-events';
-import setActivityEvents from './set-activity-events';
-import setUiEvents from './ui/set-ui-events';
+import connectAccount from "./auth/connect-account";
+import allActivities from "./activities/all-activities/all-activities";
 
 let rootElement = document.querySelector('[data-role="strava-toolkit"]');
 
 rootElement.view = {};
-    
-setTokenEvents(rootElement);
-setActivitiesEvents(rootElement);
-setActivityEvents(rootElement);
-setUiEvents(rootElement);
+
+async function start() {
+    await connectAccount(rootElement);
+
+    if (rootElement.view.isConnected) {
+        allActivities(rootElement);
+    }
+}
+
+start();

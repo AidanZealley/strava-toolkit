@@ -6,6 +6,7 @@ export default async function(rootElement) {
     let data = await response.json();
     
     rootElement.view.userData = data;
+
     return data;
 
 }
