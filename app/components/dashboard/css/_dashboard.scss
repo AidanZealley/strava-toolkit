@@ -1,0 +1,63 @@
+.dashboard {
+    background-image: linear-gradient(147deg, #283048 0%, #859398 74%);
+    background-attachment: fixed;
+    flex: 1;
+    display: flex;
+}
+
+.dashboard-sidebar {
+    width: 20em;
+    background-color: rgba(0,0,0,0.1);
+}
+
+.dashboard-user {
+    padding: 1.5em 1em;
+    background-color: rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.dashboard-profile-picture {
+    width: 3em;
+    height: 3em;
+    margin-right: 0.5em;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    position: relative;
+    margin-bottom: 0.5em;
+}
+
+.dashboard-username {
+    font-size: 1.2em;
+    color: #fff;
+    white-space: nowrap;
+    font-weight: 200;
+    letter-spacing: 0;
+}
+
+.dashboard-link {
+    display: block;
+    width: 100%;
+    font-size: 1em;
+    font-weight: bold;
+    letter-spacing: -0.05em;
+    background: 0;
+    border: 0;
+    padding: 1.5em;
+    color: rgba(255, 255, 255, 0.75);
+    text-align: left;
+    text-decoration: none;
+}
+
+.dashboard-link:hover {
+    color: #fff;
+}
+
+.dashboard-link[active] {
+    color: #fff;
+    border-left: 3px solid $accent;
+    background-image: linear-gradient(5deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.02) 74%);
+}
+
+.dashboard-content {
+    flex: 1;
+}

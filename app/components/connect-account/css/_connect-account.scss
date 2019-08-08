@@ -1,0 +1,65 @@
+.connect-account {
+    background-image: linear-gradient(147deg, #283048 0%, #859398 74%);
+    display: flex;
+    flex: 1;
+}
+
+.connect-account-info {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.connect-account-info .logo {
+    flex: 0;
+    align-self: flex-start;
+}
+
+.connect-account-info-box {
+    color: #fff;
+    width: 100%;
+    max-width: 25em;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2em;
+}
+
+.connect-account-info-box h2 {
+    font-size: 3em;
+    margin-bottom: 0.5em;
+    text-align: center;
+    letter-spacing: -0.05em;
+}
+
+.connect-account-info-box p {
+    font-size: 1.1em;
+    font-weight: 200;
+    line-height: 1.5em;
+    margin-bottom: 2em;
+}
+
+.connect-account-login {
+    background-color: #fff;
+    flex: 1;
+    padding: 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.connect-account .form {
+    width: 100%;
+    max-width: 25em;
+    margin-left: 10vw;
+    text-align: center;
+}
+
+.connect-heading {
+    color: $accent;
+    font-size: 2em;
+    margin-bottom: 0.75em;
+    letter-spacing: -0.05em;
+}
