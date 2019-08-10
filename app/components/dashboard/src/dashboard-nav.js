@@ -10,7 +10,7 @@ export default function(stravaToolkit, rootElement) {
         dashboardNav.insertAdjacentHTML('beforeend', link);
     }
 
-    addLink('#update-multiple-activities', 'Update Multiple Activities')
+    addLink('#activities', 'Activities')
     addLink('#statistics', 'Statistics');
 
 }

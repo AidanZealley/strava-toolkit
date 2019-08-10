@@ -18,8 +18,7 @@ export default async function(renderLocation, config) {
 
     const rootElement = renderLocation.querySelector('[data-component-name="loading-screen"]');
 
-    rootElement.view = {};
-    rootElement.view.config = config;
+    rootElement.config = config;
 
     loadingScreen(rootElement, config);
 

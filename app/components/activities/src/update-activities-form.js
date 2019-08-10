@@ -1,7 +1,7 @@
 export default function() {
 
     return `
-        <div class="multiple-activities__update-forms" data-role="update-activities">
+        <div class="activities__update-forms" data-role="update-activities">
             <h3 class="heading heading--light heading--m">How would you like to update your activities?</h3>
 
             <form class="form" data-role="update-all-commute-form">

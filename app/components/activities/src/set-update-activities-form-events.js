@@ -1,4 +1,4 @@
-import updateMultiplectivities from './update-multiple-activities';
+import updateMultiplectivities from './update-activities';
 
 export default async function(stravaToolkit) {
 

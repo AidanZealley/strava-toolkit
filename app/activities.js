@@ -1,4 +1,4 @@
-import multipleActivities from './components/multiple-activities';
+import activities from './components/activities';
 
 export default async function(stravaToolkit) {
 
@@ -6,6 +6,6 @@ export default async function(stravaToolkit) {
 
     dashboardContent.innerHTML = '';
 
-    multipleActivities(stravaToolkit, dashboardContent);
+    activities(stravaToolkit, dashboardContent);
 
 }

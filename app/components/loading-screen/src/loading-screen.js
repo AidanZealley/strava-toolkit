@@ -1,7 +1,7 @@
-export default function(rootElement, config) {
+export default function(rootElement) {
 
     const message = rootElement.querySelector('[data-role="message"');
 
-    message.textContent = config.message;
+    message.textContent = rootElement.config.message;
     
 }

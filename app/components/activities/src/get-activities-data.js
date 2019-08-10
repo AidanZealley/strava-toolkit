@@ -5,6 +5,10 @@ export default async function(stravaToolkit, rootElement, number, perPage) {
     const progressBar = rootElement.querySelector('[data-role="progress-bar"]');
     const updateButton = rootElement.querySelector('[data-role="submit-button"]');
 
+    if (stravaToolkit.view.activitiesData) {
+        return stravaToolkit.view.activitiesData;
+    }
+
     stravaToolkit.view.activitiesData = [];
 
     if (!number) {

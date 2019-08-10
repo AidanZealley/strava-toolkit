@@ -1,4 +1,4 @@
-import updateMultipleActivities from '../update-multiple-activities';
+import activities from '../activities';
 import statistics from '../statistics';
 import disconnect from '../disconnect';
 
@@ -10,8 +10,8 @@ export default function(stravaToolkit) {
         return stravaToolkit.view.routes[path] = page;
     };
 
-    route('/', function() { updateMultipleActivities(stravaToolkit) });
-    route('/update-multiple-activities', function() { updateMultipleActivities(stravaToolkit) });
+    route('/', function() { activities(stravaToolkit) });
+    route('/activities', function() { activities(stravaToolkit) });
     route('/statistics', function() { statistics(stravaToolkit) });
     route('/disconnect', function() { disconnect() });
 
