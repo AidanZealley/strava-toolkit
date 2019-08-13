@@ -1,5 +1,5 @@
 import updateActivity from "./single-activity/update-activity";
-import updateActivityData from "./update-activity-data";
+import updateActivity from "./update-activity";
 import updateProgressBar from "../../../utils/update-progress-bar";
 
 export default function(stravaToolkit, form) {
@@ -20,7 +20,7 @@ export default function(stravaToolkit, form) {
     async function start() {
         await asyncForEach(stravaToolkit.view.activitiesData, async (activity, index) => {
             await waitFor(20);
-            // await updateActivityData(stravaToolkit, requestBody, activity.id)
+            // await updateActivity(stravaToolkit, requestBody, activity.id)
 
             updateProgressBar(progressBar, index + 1, stravaToolkit.view.activitiesData.length, false);
         });

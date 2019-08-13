@@ -1,14 +1,12 @@
 import activities from './src/activities.js'
 
-export default function(stravaToolkit, renderLocation) {
+export default function(stravaToolkit, renderLocation, params) {
 
     const component = `
         <div class="activities" data-component-name="activities">
-            <div class="activities__loader">
-                <div class="activities__loader-content">
-                    <h2 class="heading heading--heavy heading--medium">Update Multiple Activities</h2>
-
-                    <button class="button" data-role="submit-button"><span>Get All Activities</span></button>
+            <div class="activities__header">
+                <div class="activities__header-content">
+                    <h2 class="heading heading--heavy heading--l">Activities</h2>
                 </div>
 
                 <div class="progress-bar" data-role="progress-bar" hidden><div class="progress-bar__indicator" data-role="progress-bar-indicator"></div></div>
@@ -25,6 +23,6 @@ export default function(stravaToolkit, renderLocation) {
 
     rootElement.view = {};
 
-    activities(stravaToolkit, rootElement);
+    activities(stravaToolkit, rootElement, params.page ? params.page : 1);
 
 }

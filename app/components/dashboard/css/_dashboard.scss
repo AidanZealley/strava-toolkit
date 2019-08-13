@@ -5,18 +5,23 @@
     display: flex;
 }
 
-.dashboard-sidebar {
+.dashboard__sidebar {
     flex: 0 0 20em;
     background-color: rgba(0,0,0,0.1);
 }
 
-.dashboard-user {
+.dashboard__sidebar-content {
+    position: sticky;
+    top: 0;
+}
+
+.dashboard__user {
     padding: 1.5em 1em;
     background-color: rgba(0,0,0,0.1);
     text-align: center;
 }
 
-.dashboard-profile-picture {
+.dashboard__profile-picture {
     width: 3em;
     height: 3em;
     margin-right: 0.5em;
@@ -26,7 +31,7 @@
     margin-bottom: 0.5em;
 }
 
-.dashboard-username {
+.dashboard__username {
     font-size: 1.2em;
     color: #fff;
     white-space: nowrap;
@@ -34,7 +39,7 @@
     letter-spacing: 0;
 }
 
-.dashboard-link {
+.dashboard__link {
     display: block;
     width: 100%;
     font-size: 1em;
@@ -48,17 +53,17 @@
     text-decoration: none;
 }
 
-.dashboard-link:hover {
+.dashboard__link:hover {
     color: #fff;
 }
 
-.dashboard-link[active] {
+.dashboard__link[active] {
     color: #fff;
     border-left: 3px solid $accent;
     background-image: linear-gradient(5deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.02) 74%);
 }
 
-.dashboard-content {
+.dashboard__content {
     flex: 1;
     width: calc(100% - 20em);
 }

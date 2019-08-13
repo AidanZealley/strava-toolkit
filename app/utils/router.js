@@ -6,6 +6,20 @@ export default function(stravaToolkit) {
 
     let currentRoute = '';
 
+    function createParamsObject(urlParams) {
+        let params = {};
+
+        if (urlParams.length) {
+            const rawParams = urlParams.split('&');
+        
+            rawParams.forEach(function(rawParam) {
+                params[rawParam.slice(0, rawParam.indexOf('='))] = rawParam.slice(rawParam.indexOf('=') + 1, rawParam.length);
+            });
+        }
+
+        return params;
+    }
+
     function resolveRoute(route) {
         try {
             currentRoute = route
@@ -16,9 +30,17 @@ export default function(stravaToolkit) {
     };
 
     function router() {
-        const url = window.location.hash.slice(1);
-        const routeResolved = resolveRoute(url);
-        routeResolved();
+        let url = window.location.hash.slice(1);
+        let trimmedUrl = url;
+        let urlParams = [];
+
+        if (url.indexOf('?') != -1) {
+            trimmedUrl = url.slice(0, url.indexOf('?'));
+            urlParams = url.slice(url.indexOf('?') + 1, url.length)    
+        }
+
+        const routeResolved = resolveRoute(trimmedUrl);
+        routeResolved(createParamsObject(urlParams));
         setActiveStates();
     };
 

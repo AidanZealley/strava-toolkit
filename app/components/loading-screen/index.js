@@ -1,6 +1,6 @@
 import loadingScreen from './src/loading-screen'
 
-export default async function(renderLocation, config) {
+export default function(renderLocation, config) {
 
     const component = `
         <div class="loading-screen" data-component-name="loading-screen" data-loading-for="${config.loadingFor}">
@@ -20,6 +20,6 @@ export default async function(renderLocation, config) {
 
     rootElement.config = config;
 
-    loadingScreen(rootElement, config);
+    loadingScreen(rootElement);
 
 }

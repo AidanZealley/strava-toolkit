@@ -1,18 +1,14 @@
 import updateProgressBar from '../../../utils/update-progress-bar';
 
-export default async function(stravaToolkit, rootElement, number, perPage) {
+export default async function(stravaToolkit, rootElement, number, perPage, page) {
 
     const progressBar = rootElement.querySelector('[data-role="progress-bar"]');
-    const updateButton = rootElement.querySelector('[data-role="submit-button"]');
-
-    if (stravaToolkit.view.activitiesData) {
-        return stravaToolkit.view.activitiesData;
-    }
+    // const updateButton = rootElement.querySelector('[data-role="submit-button"]');
 
     stravaToolkit.view.activitiesData = [];
 
     if (!number) {
-        number = stravaToolkit.view.statsData.all_ride_totals.count;
+        number = stravaToolkit.view.statsData.all_ride_totals.count + stravaToolkit.view.statsData.all_run_totals.count + stravaToolkit.view.statsData.all_swim_totals.count;
     }
 
     if (!perPage) {
@@ -24,12 +20,11 @@ export default async function(stravaToolkit, rootElement, number, perPage) {
         let urls = [];
 
         for (let i = 0; i < pages; i++) {
-            urls.push('https://www.strava.com/api/v3/athlete/activities?before=' + Date.now() + '&page=' + (i+1) + '&per_page=' + perPage + '&access_token=' + stravaToolkit.view.oauthData.access_token)
+            urls.push('https://www.strava.com/api/v3/athlete/activities?before=' + Date.now() + '&page=' + (page ? page : i+1) + '&per_page=' + perPage + '&access_token=' + stravaToolkit.view.oauthData.access_token)
         }
 
         return urls;
     }
-
 
     async function requestPage(url) {
         let response = await fetch(url);
@@ -48,13 +43,13 @@ export default async function(stravaToolkit, rootElement, number, perPage) {
             updateProgressBar(progressBar, index + 1, pageUrls.length, false);
         }
 
-        updateButton.removeAttribute('disabled')
+        // updateButton.removeAttribute('disabled')
         updateProgressBar(progressBar, pageUrls.length, pageUrls.length, true);
 
         return stravaToolkit.view.activitiesData;
     }
 
-    updateButton.setAttribute('disabled', '');
+    // updateButton.setAttribute('disabled', '');
 
     return await requestPages(generatePageUrls());
 

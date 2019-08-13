@@ -92,10 +92,6 @@
     grid-gap: 1em;
 }
 
-.form__selection-grid-item:first-of-type {
-    grid-column: span 2;
-}
-
 .form__selection-grid .form__input--radio {
     position: absolute;
     left: -99999px;

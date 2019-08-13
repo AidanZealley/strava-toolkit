@@ -1,4 +1,4 @@
-.activities__loader {
+.activities__header {
     padding: 3em 2em;
     text-align: center;
     background-image: url("https://www.lancaster.ac.uk/media/lancaster-university/content-assets/images/facilities/travel/CyclingHero_21600x400px.jpg");
@@ -7,7 +7,7 @@
     position: relative;
 }
 
-.activities__loader:after {
+.activities__header:after {
     content: "";
     display: block;
     position: absolute;
@@ -19,7 +19,7 @@
     z-index: 0;
 }
 
-.activities__loader .progress-bar {
+.activities__header .progress-bar {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -28,14 +28,19 @@
     background-color: rgba(255, 255, 255, 0.25);
 }
 
-.activities__loader .progress-bar[done] {
+.activities__header .progress-bar[done] {
     height: 0;
     transition: height 0.33s ease;
 }
 
-.activities__loader-content {
+.activities__header-content {
     position: relative;
     z-index: 2;
+}
+
+.activities__header .heading {
+    text-align: center;
+    margin-bottom: 0;
 }
 
 .activities__update-forms {
@@ -57,9 +62,9 @@
 }
 
 .activities__activity-selection {
+    padding: 2em;
 }
 
-.activities__activity-selection .heading {
-    text-align: center;
-    margin-bottom: 1.5em;
+.form__selection-grid-item[data-type="All"] {
+    grid-column: span 2;
 }

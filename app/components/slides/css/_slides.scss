@@ -11,7 +11,10 @@
 .slides__slide {
     flex: 1 0 100%;
     min-height: 200px;
-    padding: 2em;
+}
+
+.slides__slide[inactive] {
+    height: 0;
 }
 
 .slides__timeline {
@@ -64,10 +67,13 @@
     background-clip: padding-box;
     border-radius: 50%;
     z-index: 1;
+}
+
+.slides__timeline-node-button:not([disabled]) {
     cursor: pointer;
 }
 
-.slides__timeline-node-button:not(active):hover {
+.slides__timeline-node-button:not(active, disabled):hover {
     border-color: $accent;
 }
 

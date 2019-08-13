@@ -5,7 +5,9 @@ import changeSlides from './change-slides';
 
 export default function(rootElement) {
 
-    rootElement.insertAdjacentHTML('afterbegin', slidesTimeline(rootElement));
+    if (rootElement.config.timeline) {
+        rootElement.insertAdjacentHTML('afterbegin', slidesTimeline(rootElement));
+    }
 
     for (let i = 0; i < rootElement.config.total; i++) {
         renderSlide(rootElement, i);       

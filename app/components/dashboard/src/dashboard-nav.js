@@ -4,7 +4,7 @@ export default function(stravaToolkit, rootElement) {
 
     function addLink(path, text) {
         const link = `
-            <a href="${path}" class="dashboard-link">${text}</button>
+            <a href="${path}" class="dashboard__link">${text}</button>
         `;
 
         dashboardNav.insertAdjacentHTML('beforeend', link);

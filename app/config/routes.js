@@ -10,9 +10,9 @@ export default function(stravaToolkit) {
         return stravaToolkit.view.routes[path] = page;
     };
 
-    route('/', function() { activities(stravaToolkit) });
-    route('/activities', function() { activities(stravaToolkit) });
-    route('/statistics', function() { statistics(stravaToolkit) });
-    route('/disconnect', function() { disconnect() });
+    route('/', function(params) { activities(stravaToolkit, params) });
+    route('/activities', function(params) { activities(stravaToolkit, params) });
+    route('/statistics', function(params) { statistics(stravaToolkit, params) });
+    route('/disconnect', function(params) { disconnect() });
 
 }

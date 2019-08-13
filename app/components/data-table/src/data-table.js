@@ -4,11 +4,11 @@ export default function(rootElement) {
 
     function buildTableHeader() {
         const tableHeader = `
-            <thead>
+            <thead class="data-table__table-header">
                 <tr>
-                    ${rootElement.config.tableHeadings.map(function (tableHeading) {
+                    ${rootElement.config.data.tableHeadings.map(function (tableHeading) {
                         return `
-                            <th>${tableHeading}</th>
+                            <th class="data-table__table-heading">${tableHeading}</th>
                         `
                     }).join('')}
                 </tr>
@@ -18,25 +18,25 @@ export default function(rootElement) {
         table.insertAdjacentHTML('beforeend', tableHeader);
     }
 
-    function buildTableRow(tableRow) {
+    function buildTableRow(tableRow, index) {
         const newTableRow = `
-            <tr>
-                ${tableRow.map(function (cell) {
+            <tr class="data-table__table-row" data-role="table-row" data-row="${index}">
+                ${tableRow.map(function(cell) {
                     return `
-                        <td>${cell}</td>
+                        <td class="data-table__table-cell">${cell}</td>
                     `
                 }).join('')}
             </tr>
         `;
 
-        table.insertAdjacentHTML('beforeend', newTableRow);
+        return newTableRow;
     }
 
     function buildTableBody() {
         const tableBody = `
-            <tbody>
-                ${rootElement.config.tableRows.map(function (tableRow) {
-                    buildTableRow(tableRow)
+            <tbody class="data-table__table-body">
+                ${rootElement.config.data.tableRows.map(function(tableRow, index) {
+                    return buildTableRow(tableRow, index);
                 }).join('')}
             </tbody>
         `;

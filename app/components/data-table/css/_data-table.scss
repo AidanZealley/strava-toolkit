@@ -1,0 +1,41 @@
+.data-table {
+    padding: 2em;
+}
+
+.data-table__table {
+    width: 100%;
+    border-spacing:0 1em;
+}
+
+.data-table__table-header {
+
+}
+
+.data-table__table-heading {
+    
+}
+
+.data-table__table-body {
+    
+}
+
+.data-table__table-body .data-table__table-row {
+    background-image: linear-gradient(5deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 74%);
+}
+
+.data-table--clickable-rows .data-table__table-row {
+    cursor: pointer;
+}
+
+.data-table--clickable-rows .data-table__table-row:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.data-table__table-cell {
+    border-collapse: collapse;
+    padding: 1.25em 1em;
+}
+
+.data-table__table-cell + .data-table__table-cell {
+    padding-left: 0;
+}
