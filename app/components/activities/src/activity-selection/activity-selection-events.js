@@ -1,4 +1,4 @@
-import createTableData from '../create-table-rows';
+import createTableData from '../create-table-data';
 import dataTable from '../../../data-table';
 import modal from '../../../modal';
 

@@ -1,5 +1,7 @@
 .form__block {
     position: relative;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .form__block + .form__block {
@@ -11,23 +13,31 @@
     font-size: 0.9em;
     margin-bottom: 0.5em;
     text-align: left;
+    flex: 1 0 100%;
 }
-
-.form__input[type="text"],
-.form__input[type="password"] {
+.form__input {
     font-size: 1em;
     width: 100%;
     padding: 1em;
-    border: 0;
-    position: relative;
     outline: none;
     font-weight: bold;
     color: $dark;
 }
 
+textarea.form__input,
+.form__input[type="text"],
+.form__input[type="password"] {
+    border: 1px solid $mid;
+}
+
+textarea.form__input {
+    min-height: 8em;
+}
+
 .form__input--placeholder[type="text"],
 .form__input--placeholder[type="password"] {
     padding: 1em 0;
+    border: 0;
     border-bottom: 1px solid $dark;
     position: relative;
     outline: none;
@@ -46,7 +56,7 @@
     font-size: 1em;
     padding: 2em 0 1em 0;
     overflow: hidden;
-    color: #859398;
+    color: $mid;
 }
 
 .form__input--placeholder + .form__label span {
@@ -113,9 +123,6 @@
     background-color: rgba(255, 255, 255, 0.1);
 }
 
-.form__input--radio:checked ~ .form__visual-toggle:hover {
-}
-
 .form__visual-toggle .form__label {
     display: block;
     width: 100%;
@@ -135,4 +142,12 @@
 
 .form__visual-toggle .form__label-secondary {
     font-weight: 200;
+}
+
+.form--light {
+    color: $dark;
+
+    .form__input {
+        border: 1px solid $dark;
+    }
 }

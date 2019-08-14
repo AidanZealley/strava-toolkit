@@ -1,5 +1,5 @@
-import updateActivity from "./single-activity/update-activity";
-import updateActivity from "./update-activity";
+import updateActivity from "../../update-activity/src/prepare-post-object";
+import updateActivity from "../../update-activity/src/update-activity-data";
 import updateProgressBar from "../../../utils/update-progress-bar";
 
 export default function(stravaToolkit, form) {

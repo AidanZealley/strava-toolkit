@@ -30,6 +30,7 @@ export default function(stravaToolkit) {
     };
 
     function router() {
+        
         let url = window.location.hash.slice(1);
         let trimmedUrl = url;
         let urlParams = [];

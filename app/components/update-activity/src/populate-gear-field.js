@@ -1,4 +1,4 @@
-export default function(stravaToolkit, gearType, gearField) {
+export default function(stravaToolkit, gearType, gearField, gearBlock, activity) {
 
     gearField.innerHTML = '';
 
@@ -15,14 +15,19 @@ export default function(stravaToolkit, gearType, gearField) {
             `;
 
             gearField.insertAdjacentHTML('beforeend', gearOption);
+
+            if (gearItem.id == activity.gear_id) {
+                gearField.value = gearItem.id;
+            }
         });
     }
 
     if (gearType) {
         createGearOptions(gearType);
+        gearBlock.removeAttribute('hidden');
     } else {
-        createGearOptions('bikes');
-        createGearOptions('shoes');
+        gearField.value = 'none';
+        gearBlock.setAttribute('hidden', '');
     }
 
 }

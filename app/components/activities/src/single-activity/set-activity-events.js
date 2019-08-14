@@ -1,7 +1,7 @@
-import getActivityData from './get-activity-data';
-import updateActivityData from '../update-activity-data';
+import getActivityData from '../../../update-activity/src/get-activity-data';
+import updateActivityData from '../../../update-activity/src/update-activity-data';
 import populateUpdateActivityForm from '../../ui/populate-update-activity-form';
-import updateActivity from './update-activity';
+import updateActivity from '../../../update-activity/src/prepare-post-object';
 
 export default function(stravaToolkit) {
 

@@ -20,8 +20,8 @@ export default function(rootElement) {
 
     function buildTableRow(tableRow, index) {
         const newTableRow = `
-            <tr class="data-table__table-row" data-role="table-row" data-row="${index}">
-                ${tableRow.map(function(cell) {
+            <tr class="data-table__table-row" data-role="table-row" data-row="${index}" data-activity-id="${tableRow.id}">
+                ${tableRow.cells.map(function(cell) {
                     return `
                         <td class="data-table__table-cell">${cell}</td>
                     `

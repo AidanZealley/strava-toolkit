@@ -2,7 +2,18 @@ export default function(rootElement) {
 
     const modalInner = rootElement.querySelector('[data-role="modal-inner"]');
     const modalBody = rootElement.querySelector('[data-role="modal-body"]');
-    const modalClose = rootElement.querySelector('[data-role="modal-close"]');
+
+    function setModalCloseEvents() {
+        const modalClosers = rootElement.querySelectorAll('[data-role="modal-close"]');
+
+        Array.from(modalClosers).forEach(function(modalCloser) {        
+            modalCloser.addEventListener('click', function(e) {
+                e.preventDefault();
+    
+                closeModal();
+            });
+        });
+    }
 
     function showModal() {
         rootElement.removeAttribute('hidden');
@@ -13,8 +24,8 @@ export default function(rootElement) {
     }
 
     const modalContentObserver = new MutationObserver(function() {
-        console.log('show')
         showModal();
+        setModalCloseEvents();
     });
 
     modalContentObserver.observe(modalBody, {
@@ -22,10 +33,6 @@ export default function(rootElement) {
         attributes: true,
         childList: true,
         subtree: true
-    });
-
-    modalClose.addEventListener('click', function(e) {
-        closeModal();
     });
 
     rootElement.addEventListener('click', function(e) {

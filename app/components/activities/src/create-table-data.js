@@ -10,14 +10,17 @@ export default function(stravaToolkit, headings, activities) {
     tableData.tableRows = [];
 
     activities.forEach(function(activity) {
-        let newActivity = [];
+        let newActivity = {};
+        
+        newActivity.id = activity.id;
+        newActivity.cells = [];
 
-        newActivity.push(activity.type);
-        newActivity.push(formatDate(activity.start_date_local));
-        newActivity.push(activity.name);
-        newActivity.push(hoursMinutesSeconds(activity.moving_time));
-        newActivity.push(unitConversion(stravaToolkit, activity.distance, 2, true));
-        newActivity.push(unitConversion(stravaToolkit, activity.total_elevation_gain, 0, false));
+        newActivity.cells.push(activity.type);
+        newActivity.cells.push(formatDate(activity.start_date_local));
+        newActivity.cells.push(activity.name);
+        newActivity.cells.push(hoursMinutesSeconds(activity.moving_time));
+        newActivity.cells.push(unitConversion(stravaToolkit, activity.distance, 2, true));
+        newActivity.cells.push(unitConversion(stravaToolkit, activity.total_elevation_gain, 0, false));
 
         tableData.tableRows.push(newActivity);
     });

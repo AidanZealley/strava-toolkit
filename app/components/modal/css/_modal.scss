@@ -3,22 +3,66 @@
     z-index: 2;
     width: 100vw;
     height: 100vh;
+    padding: 1em;
     top: 0;
-    background: rgba(0, 0, 0, 0.3);
+    background-image: linear-gradient(147deg, rgba(40, 48, 72, 0.75) 0%, rgba(133, 147, 152, 0.75) 74%);
+    opacity: 1;
+    transition: opacity 0.33s ease;
+}
+
+.modal[hidden] {
+    display: block;
+    opacity: 0;
+    pointer-events: none;
 }
 
 .modal__inner {
-    max-width: 400px;
+    max-width: 35em;
+    max-height: calc(100vh - 2em);
     margin: 50vh auto 0 auto;
-    transform: translateY(-50%);
+    transform: translateY(calc(-50% - 1em)) scale(1);
     position: relative;
     background: #fff;
+    transition: transform 0.166s ease;
+    overflow: auto;
+}
+
+.modal[hidden] .modal__inner {
+    display: block;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-50%) scale(0.75);
 }
 
 .modal__close {
+    font-size: 1em;
     position: absolute;
     top: 0;
+    width: 3em;
     right: 0;
+    height: 3em;
+    background: none;
+    border: 0;
+    cursor: pointer;
+
+    svg {
+        display: block;
+        width:100%;
+        height: 100%;
+        fill: $dark;
+    }
+
+    &:hover {
+        svg {
+            fill: $mid;
+        }
+    }
+}
+
+.modal__header .heading {
+    text-align: center;
+    padding-top: 1em;
+    margin-bottom: 0;
 }
 
 .modal__body {

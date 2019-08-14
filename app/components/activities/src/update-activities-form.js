@@ -90,7 +90,7 @@ export default function() {
                         <option value="Wheelchair">Wheelchair</option>
                         <option value="Windsurf">Windsurf</option>
                         <option value="Workout">Workout</option>
-                        <option value="Yog">Yog</option>
+                        <option value="Yoga">Yoga</option>
                     </select>
                 </div>
                 <div class="form__block">

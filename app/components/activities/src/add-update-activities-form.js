@@ -1,4 +1,4 @@
-import populateGearField from './populate-gear-field';
+import populateGearField from '../../update-activity/src/populate-gear-field';
 import updateActivitiesFormTemplate from './update-activities-form';
 import setUpdateActivitiesFormEvents from './set-update-activities-form-events';
 

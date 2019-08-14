@@ -1,6 +1,8 @@
 import getActivitiesData from './get-activities-data';
 import createTableData from './create-table-data';
 import dataTable from '../../data-table';
+import modal from '../../modal';
+import updateActivity from '../../update-activity';
 
 export default async function(stravaToolkit, rootElement, page) {
 
@@ -57,6 +59,27 @@ export default async function(stravaToolkit, rootElement, page) {
         tableConfig.modifiers = 'data-table--clickable-rows';
 
         dataTable(multipleActivitiesContent, tableConfig);
+
+        const tableRows = multipleActivitiesContent.querySelectorAll('[data-role="table-row"]');
+
+        let modalConfig = {};
+        modalConfig.heading = 'Update Activity';
+
+        modal(stravaToolkit, modalConfig);
+
+        Array.from(tableRows).forEach(function(tableRow) {
+            tableRow.onclick = function() {
+                const modal = stravaToolkit.querySelector('[data-component-name="modal"]');
+                const modalBody = modal.querySelector('[data-role="modal-body"]');
+
+                let updateConfig = {}
+
+                updateConfig.activityId = tableRow.getAttribute('data-activity-id');
+                updateConfig.row = tableRow.getAttribute('data-row');
+
+                updateActivity(stravaToolkit, modalBody, updateConfig);
+            };
+        });
     });
     
 }
