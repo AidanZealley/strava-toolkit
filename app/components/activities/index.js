@@ -4,16 +4,16 @@ export default function(stravaToolkit, renderLocation, params) {
 
     const component = `
         <div class="activities" data-component-name="activities">
-            <div class="activities__header">
-                <div class="activities__header-content">
-                    <h2 class="heading heading--heavy heading--l">Activities</h2>
-                </div>
+            <div class="progress-bar" data-role="progress-bar" hidden><div class="progress-bar__indicator" data-role="progress-bar-indicator"></div></div>
 
-                <div class="progress-bar" data-role="progress-bar" hidden><div class="progress-bar__indicator" data-role="progress-bar-indicator"></div></div>
+            <div class="activities__filter" data-role="activities-filter">
             </div>
 
             <div class="activities__content" data-role="activities-content">
-            </div>    
+            </div>
+
+            <div class="activities__footer" data-role="activities-footer">
+            </div>
         </div>
     `;
 

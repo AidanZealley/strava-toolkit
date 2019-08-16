@@ -1,51 +1,19 @@
-import getActivitiesData from './get-activities-data';
+import getActivitiesData from '../../../utils/get-activities-data';
 import createTableData from './create-table-data';
 import dataTable from '../../data-table';
 import modal from '../../modal';
 import updateActivity from '../../update-activity';
+import pagination from '../../pagination';
+import loadingScreen from '../../loading-screen';
+import hideLoadingScreen from '../../../utils/hide-loading-screen';
 
 export default async function(stravaToolkit, rootElement, page) {
 
-    // const getAllActivitiesButton = rootElement.querySelector('[data-role="submit-button"]');
-    const multipleActivitiesContent = rootElement.querySelector('[data-role="activities-content"]');
+    const activitiesFilter = rootElement.querySelector('[data-role="activities-filter"]');
+    const activitiesContent = rootElement.querySelector('[data-role="activities-content"]');
+    const activitiesFooter = rootElement.querySelector('[data-role="activities-footer"]');
 
-    // function loadFirstSLide() {
-    //     multipleActivitiesContent.innerHTML = '';
-
-    //     slides(multipleActivitiesContent, {total: 3, disableInactive: true});
-
-    //     const slidesContainer = multipleActivitiesContent.querySelector('[data-role="slides-container"]');
-    //     const slide1 = slidesContainer.querySelector('[data-slide="0"]');
-
-    //     slide1.insertAdjacentHTML('beforeend', activitySelection(stravaToolkit, rootElement, slide1));
-    // }
-
-    // async function startSlides(refresh) {
-    //     multipleActivitiesContent.innerHTML = '';
-
-    //     if (refresh) {
-    //         await getActivitiesData(stravaToolkit, rootElement, 40, 20)
-    //         .then(function() {
-    //             loadFirstSLide()
-    //         });    
-    //     } else {
-    //         loadFirstSLide()
-    //     }
-    // }
-
-    // if (stravaToolkit.view.activitiesData) {
-    //     startSlides(false);
-    // }
-
-    // getAllActivitiesButton.onclick = startSlides.bind(this, true);
-
-
-    // import createTableData from './create-table-data';
-    // import dataTable from '../../../data-table';
-    // import modal from '../../../modal';
-
-    await getActivitiesData(stravaToolkit, rootElement, 30, 30, page)
-    .then(function(data) {
+    function activitiesTable(data) {
         const tableHeadings = [
             'Sport',
             'Date',
@@ -54,15 +22,22 @@ export default async function(stravaToolkit, rootElement, page) {
             'Distance',
             'Elevation'
         ];
+
         let tableConfig = {}
+
         tableConfig.data = createTableData(stravaToolkit, tableHeadings, data);
         tableConfig.modifiers = 'data-table--clickable-rows';
 
-        dataTable(multipleActivitiesContent, tableConfig);
+        dataTable(activitiesContent, tableConfig);
+    }
 
-        const tableRows = multipleActivitiesContent.querySelectorAll('[data-role="table-row"]');
+    function tableRowEvents() {
+
+        const table = activitiesContent.querySelector('[data-component-name="data-table"]');
+        const tableRows = table.querySelectorAll('[data-role="table-row"]');
 
         let modalConfig = {};
+
         modalConfig.heading = 'Update Activity';
 
         modal(stravaToolkit, modalConfig);
@@ -76,10 +51,32 @@ export default async function(stravaToolkit, rootElement, page) {
 
                 updateConfig.activityId = tableRow.getAttribute('data-activity-id');
                 updateConfig.row = tableRow.getAttribute('data-row');
+                updateConfig.updatingFor = table;
 
                 updateActivity(stravaToolkit, modalBody, updateConfig);
             };
         });
+    }
+
+    const loadingScreenConfig = {
+        message: 'Loading activities...'
+    }
+
+    loadingScreen(activitiesContent, loadingScreenConfig);
+
+    await getActivitiesData(stravaToolkit, rootElement, 30, 30, page)
+    .then(function(data) {
+        hideLoadingScreen(stravaToolkit);
+        activitiesTable(data);
+        tableRowEvents();
+
+        let paginationConfig = {};
+
+        paginationConfig.pages = Math.ceil((stravaToolkit.view.statsData.all_ride_totals.count + stravaToolkit.view.statsData.all_run_totals.count) / 30);
+        paginationConfig.currentPage = page;
+        paginationConfig.rootUrl = '#activities';
+
+        pagination(activitiesFooter, paginationConfig); 
     });
     
 }

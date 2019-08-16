@@ -1,14 +1,13 @@
-import updateProgressBar from '../../../utils/update-progress-bar';
+import updateProgressBar from './update-progress-bar';
 
 export default async function(stravaToolkit, rootElement, number, perPage, page) {
 
     const progressBar = rootElement.querySelector('[data-role="progress-bar"]');
-    // const updateButton = rootElement.querySelector('[data-role="submit-button"]');
 
     stravaToolkit.view.activitiesData = [];
 
     if (!number) {
-        number = stravaToolkit.view.statsData.all_ride_totals.count + stravaToolkit.view.statsData.all_run_totals.count + stravaToolkit.view.statsData.all_swim_totals.count;
+        number = stravaToolkit.view.statsData.all_ride_totals.count + stravaToolkit.view.statsData.all_run_totals.count;
     }
 
     if (!perPage) {
@@ -33,23 +32,26 @@ export default async function(stravaToolkit, rootElement, number, perPage, page)
     }
 
     async function requestPages(pageUrls) {
-        progressBar.removeAttribute('hidden');
+        if (progressBar) {
+            progressBar.removeAttribute('hidden');
+        }
 
         for (let [index, pageUrl] of pageUrls.entries()) {
             let data = await requestPage(pageUrl)
 
             stravaToolkit.view.activitiesData = stravaToolkit.view.activitiesData.concat(data)
 
-            updateProgressBar(progressBar, index + 1, pageUrls.length, false);
+            if (progressBar) {
+                updateProgressBar(progressBar, index + 1, pageUrls.length, false);
+            }
         }
 
-        // updateButton.removeAttribute('disabled')
-        updateProgressBar(progressBar, pageUrls.length, pageUrls.length, true);
+        if (progressBar) {
+            updateProgressBar(progressBar, pageUrls.length, pageUrls.length, true);
+        }
 
         return stravaToolkit.view.activitiesData;
     }
-
-    // updateButton.setAttribute('disabled', '');
 
     return await requestPages(generatePageUrls());
 

@@ -1,0 +1,30 @@
+.page-header {
+    padding: 3em 2em;
+    text-align: center;
+    background-image: url("https://www.lancaster.ac.uk/media/lancaster-university/content-assets/images/facilities/travel/CyclingHero_21600x400px.jpg");
+    background-size: cover;
+    background-position: bottom center;
+    position: relative;
+}
+
+.page-header:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 0;
+}
+
+.page-header__content {
+    position: relative;
+    z-index: 2;
+}
+
+.page-header .heading {
+    text-align: center;
+    margin-bottom: 0;
+}

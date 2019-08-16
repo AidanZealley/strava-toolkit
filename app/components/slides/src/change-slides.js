@@ -23,12 +23,18 @@ export default function(rootElement) {
                     timelineNodes[index - 1].setAttribute('completed', '');
                 }
             } else {
-                if (slides[index].innerHTML == '') {
-                    node.removeAttribute('active');
+                // if (slides[index].innerHTML == '') {
+                //     node.removeAttribute('active');
 
-                    if (rootElement.config.disableInactive) {
-                        nodeButton.setAttribute('disabled', '');
-                    }
+                //     if (rootElement.config.disableInactive) {
+                //         nodeButton.setAttribute('disabled', '');
+                //     }
+                // }
+
+                node.removeAttribute('active');
+
+                if (rootElement.config.disableInactive) {
+                    nodeButton.setAttribute('disabled', '');
                 }
 
                 if (index >= 1) {

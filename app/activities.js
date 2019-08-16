@@ -1,3 +1,4 @@
+import pageHeader from './components/page-header';
 import activities from './components/activities';
 
 export default async function(stravaToolkit, params) {
@@ -6,6 +7,11 @@ export default async function(stravaToolkit, params) {
 
     dashboardContent.innerHTML = '';
 
+    let pageHeaderConfig = {};
+
+    pageHeaderConfig.heading = 'Activities';
+
+    pageHeader(dashboardContent, pageHeaderConfig);
     activities(stravaToolkit, dashboardContent, params);
 
 }

@@ -8,8 +8,6 @@ import hideLoadingScreen from '../../../utils/hide-loading-screen';
 
 export default async function(stravaToolkit) {
 
-    // loadingScreen(stravaToolkit, loadingScreenConfig);
-
     if (!stravaToolkit.view.isConnected) {
         const stravaToolkitAuth = JSON.parse(localStorage.getItem('stravaToolkitAuth'));
         const loadingScreenConfig = {

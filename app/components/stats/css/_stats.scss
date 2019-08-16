@@ -1,0 +1,43 @@
+.stats {
+    flex: 1;
+    padding: 2em;
+    position: relative;
+}
+
+.stats__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    grid-gap: 1em;
+    grid-auto-rows: minmax(180px, auto);
+    grid-auto-flow: dense;
+}
+
+.stats .progress-bar {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.25);
+}
+
+.stats .progress-bar[done] {
+    height: 0;
+    transition: height 0.33s ease;
+}
+
+.stats__stat {
+    padding: 1em;
+    font-size: 1em;
+    font-weight: bold;
+    background-image: linear-gradient(5deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 74%);
+}
+
+.stats__stat--span-2 {
+    grid-column-end: span 2;
+    grid-row-end: span 2;
+}
+
+.stats__stat--span-3 {
+    grid-column-end: span 3;
+    grid-row-end: span 4;
+}

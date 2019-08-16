@@ -66,4 +66,6 @@
 .dashboard__content {
     flex: 1;
     width: calc(100% - 20em);
+    display: flex;
+    flex-direction: column;
 }

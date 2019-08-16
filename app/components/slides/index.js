@@ -3,7 +3,7 @@ import slides from './src/slides'
 export default function(renderLocation, config) {
 
     const component = `
-        <div class="slides" data-component-name="slides">
+        <div class="slides${config.modifiers ? ` ${config.modifiers}` : ''}" data-component-name="slides">
             <div class="slides__container" data-role="slides-container" data-current-slide="0"></div>
         </div>
     `;
