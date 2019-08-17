@@ -1,16 +1,16 @@
-export default function() {
+export default function(statObject) {
 
     return `
         <form class="form form--light" data-role="add-stat">
             <div class="form__block">
                 <label class="form__label">Choose order</label>
                 <div>
-                    <input type="radio" id="desc" name="order" value="desc" checked>
+                    <input type="radio" id="desc" name="order" value="desc"${statObject.order == 'desc' ? ` checked` : ` checked`}>
                     <label for="desc">Highest first</label>
                 </div>
 
                 <div>
-                    <input type="radio" id="asc" name="order" value="asc">
+                    <input type="radio" id="asc" name="order" value="asc"${statObject.order == 'asc' ? ` checked` : ''}>
                     <label for="asc">Lowest first</label>
                 </div>
             </div>

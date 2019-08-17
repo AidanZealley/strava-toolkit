@@ -1,4 +1,6 @@
-export default function() {
+import createFilter from './create-filter';
+
+export default function(statObject) {
 
     return `
         <form class="form form--light" data-role="add-filter">
@@ -11,13 +13,15 @@ export default function() {
                     <option value="name">Activity name</option>
                     <option value="commute">Commute</option>
                 </select>
-                <button class="button button--small button--right" data-role="submit"><span>Add Filter</span></button>
+                <button class="button button--small button--right" data-role="add-filter-button"><span>Add Filter</span></button>
             </div>
 
-            <div class="form__block stats__filters" data-role="filters">
-                <div class="stats__filter" data-role="filter" data-filter="name" data-filter-value="Morning Ride">
-
-                </div>
+            <div class="form__block stats__filters" data-role="filter-container">
+                ${statObject.filters ? `
+                    ${statObject.filters.map(function(filter) {
+                        return createFilter(filter);
+                    }).join('')}
+                `: ''}
             </div>
 
             <div class="form__block">

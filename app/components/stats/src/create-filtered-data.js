@@ -1,4 +1,4 @@
-export default function(stravaToolkit, stat) {
+export default function(stravaToolkit, statObject) {
 
     function compareValues(key, order='asc') {
         return function(a, b) {
@@ -23,28 +23,42 @@ export default function(stravaToolkit, stat) {
         };
     }
 
-    let filteredStats = [];
+    let filteredActivities = [];
 
-    // For each filter loop through and add matching activities to filteredData 
-    stat.filters.forEach(function(filter) {
-        stravaToolkit.view.activitiesData.forEach(function(activity) {
-            if (activity[filter.field] == filter.value) {
-                filteredStats.push(activity);
-            }
+    if (statObject.filters.length > 0) {
+        // For each filter loop through and add matching activities to filteredActivities 
+        statObject.filters.forEach(function(filter) {
+            stravaToolkit.view.activitiesData.forEach(function(activity) {
+                let match = false;
+
+                if (typeof filter.value == 'string') {
+                    if (activity[filter.field] == filter.value || activity[filter.field].toLowerCase().includes(filter.value.toLowerCase())) {
+                        match = true;
+                    }
+                } else if (activity[filter.field] == filter.value) {
+                    match = true;
+                }
+                
+                if (match) {
+                    filteredActivities.push(activity);
+                }
+            });
         });
-    });
-
-    // Sort filteredData in chosen direction
-    filteredStats.sort(compareValues(stat.field, stat.order));
-
-    stat.data = [];
-
-    for (let i = 0; i < stat.limit; i++) {
-        stat.data.push(filteredStats[i][stat.field]);
+    } else {
+        filteredActivities = stravaToolkit.view.activitiesData;
     }
 
-    console.log(filteredStats, stat.field, stat.data);
+    // Sort filteredActivities in chosen direction
+    filteredActivities.sort(compareValues(statObject.field, statObject.order));
 
-    return stat;
+    let statData = [];
+
+    for (let i = 0; i < statObject.limit; i++) {
+        if (filteredActivities[i]) {
+            statData.push(filteredActivities[i][statObject.field]);
+        }
+    }
+
+    return statData;
 
 }
