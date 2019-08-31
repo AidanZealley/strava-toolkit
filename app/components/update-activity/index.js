@@ -1,4 +1,4 @@
-import updateActivity from './src/update-activity'
+import updateActivity from './src/update-activity';
 
 export default function(stravaToolkit, renderLocation, config) {
 
@@ -6,6 +6,7 @@ export default function(stravaToolkit, renderLocation, config) {
 
     const component = `
         <div class="update-activity" data-component-name="update-activity">
+
             <form class="form form--light">
                 <div class="form__block">
                     <label class="form__label">Title</label>

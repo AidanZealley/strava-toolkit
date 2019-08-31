@@ -27,7 +27,9 @@ export default function() {
                         <input class="form__input form__input--placeholder" type="password" name="client_secret" required>
                         <label class="form__label" data-text="Client Secret"><span>Client Secret</span></label>
                     </div>
-                    <button class="button" data-role="submit-button"><span>Connect Account</span></button>
+                    <div class="form__block">
+                        <button class="button button--right" data-role="submit-button"><span>Connect Account</span></button>
+                    </div>
                 </form>
             </div>
         </div>

@@ -7,7 +7,7 @@ export default function(stravaToolkit, rootElement) {
     let statObject = {};
 
     statObject.id = uniqueId();
-    statObject.limit = 3;
+    statObject.limit = 1;
     
     statForm(stravaToolkit, statsGrid, statObject);
 }

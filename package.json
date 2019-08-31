@@ -10,6 +10,7 @@
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.5.5",
+    "@mapbox/polyline": "^1.1.0",
     "babel-loader": "^8.0.6",
     "css-loader": "^3.2.0",
     "file-loader": "^4.1.0",

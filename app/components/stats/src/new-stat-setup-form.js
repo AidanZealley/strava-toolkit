@@ -9,9 +9,14 @@ export default function(statObject) {
 
             <div class="form__block">
                 <label class="form__label">Choose field</label>
-                <select name="field"${statObject.field ? ` value="${statObject.field}"` : ''}>
+                <select name="field">
                     <option value="moving_time">Moving time</option>
+                    <option value="total_elevation_gain">Elevation Gain</option>
                     <option value="distance">Distance</option>
+                    <option value="average_speed">Average Speed</option>
+                    <option value="average_watts">Average Watts</option>
+                    <option value="max_speed">Max Speed</option>calories
+                    <option value="achievement_count">Achievement Count</option>
                 </select>
             </div>
 

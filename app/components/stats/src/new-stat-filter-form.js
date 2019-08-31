@@ -10,8 +10,11 @@ export default function(statObject) {
             <div class="form__block">
                 <label class="form__label">Choose filters</label>
                 <select name="filter">
+                    <option value="type">Activity Type</option>
                     <option value="name">Activity name</option>
                     <option value="commute">Commute</option>
+                    <option value="gear_id">Gear</option>
+                    <option value="trainer">Trainer</option>
                 </select>
                 <button class="button button--small button--right" data-role="add-filter-button"><span>Add Filter</span></button>
             </div>

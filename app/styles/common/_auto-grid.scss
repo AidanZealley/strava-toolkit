@@ -1,0 +1,29 @@
+.auto-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: 1em;
+    grid-auto-rows: minmax(5em, auto);
+    grid-auto-flow: dense;
+    align-items: center;
+}
+
+.auto-grid__item {
+    height: 100%;
+}
+
+.auto-grid__item--span-2-1 {
+    grid-column-end: span 2;
+}
+
+.auto-grid__item--span-2-2 {
+    grid-column-end: span 2;
+    grid-row-end: span 2;
+}
+
+.auto-grid__item--span-50 {
+    grid-row-end: 2fr;
+}
+
+.auto-grid__item--span-all {
+    grid-column: 1 / -1;
+}

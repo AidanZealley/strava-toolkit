@@ -30,6 +30,12 @@
     font-size: 1em;
     font-weight: bold;
     background-image: linear-gradient(5deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 74%);
+    text-align: center;
+}
+
+.stats__stat p {
+    font-weight: 200;
+    margin: 0.5em 0;
 }
 
 .stats__stat--span-2 {
@@ -40,4 +46,27 @@
 .stats__stat--span-3 {
     grid-column-end: span 3;
     grid-row-end: span 4;
+}
+
+.stats__stat-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em;
+}
+
+.stats__stat-item:first-of-type {
+    font-size: 2.5em;
+
+    p {
+        margin: 0;
+    }
+}
+
+.stats__stat-item:first-of-type + .stats__stat-item {
+    font-size: 2em;
+
+    p {
+        margin: 0.25em 0;
+    }
 }

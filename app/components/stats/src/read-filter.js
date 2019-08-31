@@ -8,11 +8,7 @@ export default function(filter) {
                 return input.value;
             
             case 'checkbox':
-                if (filter.querySelector('input:checked')) {
-                    return 'true';
-                } else {
-                    return 'false';
-                }
+                return !!filter.querySelector('input:checked');
         }
     }
 

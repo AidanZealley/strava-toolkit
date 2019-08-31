@@ -23,18 +23,35 @@ export default function(stravaToolkit, renderLocation, statObject) {
         formSlides[0].insertAdjacentHTML('beforeend', newStatSetupForm(statObject));
 
         const nextButton = formSlides[0].querySelector('[data-role="next"]');
+        const timelineNodeButtons = slidesTimeline.querySelectorAll('[data-role="timeline-node-button"]');
         const name = formSlides[0].querySelector('[name="name"]');
         const field = formSlides[0].querySelector('[name="field"]');
 
-        nextButton.onclick = function(e) {
-            e.preventDefault();
+        if (statObject.field) {
+            field.value = statObject.field;
+        }
 
+        function completeSlide1() {
             statObject.name = name.value;
             statObject.field = field.value;
             
             if (name.value && field.value) {
                 slidesContainer.setAttribute('data-current-slide', 1);
             }
+        }
+
+        Array.from(timelineNodeButtons).forEach(function(timelineNodeButton) {
+            timelineNodeButton.onclick = function(e) {
+                e.preventDefault();
+    
+                completeSlide1();
+            }
+        });
+
+        nextButton.onclick = function(e) {
+            e.preventDefault();
+
+            completeSlide1();
         }
     }
 
@@ -43,6 +60,7 @@ export default function(stravaToolkit, renderLocation, statObject) {
 
         const prevButton = formSlides[1].querySelector('[data-role="prev"]');
         const nextButton = formSlides[1].querySelector('[data-role="next"]');
+        const timelineNodeButtons = slidesTimeline.querySelectorAll('[data-role="timeline-node-button"]');
 
         prevButton.onclick = function(e) {
             e.preventDefault();
@@ -50,12 +68,26 @@ export default function(stravaToolkit, renderLocation, statObject) {
             slidesContainer.setAttribute('data-current-slide', 0);
         }
 
+        function completeSlide2() {
+            statObject.order = formSlides[1].querySelector('[name="order"]:checked').value;
+            statObject.limit = formSlides[1].querySelector('[name="limit"]').value;
+
+            slidesContainer.setAttribute('data-current-slide', 2);
+
+        }
+
+        Array.from(timelineNodeButtons).forEach(function(timelineNodeButton) {
+            timelineNodeButton.onclick = function(e) {
+                e.preventDefault();
+    
+                completeSlide2();
+            }
+        });
+
         nextButton.onclick = function(e) {
             e.preventDefault();
             
-            statObject.order = formSlides[1].querySelector('[name="order"]:checked').value;
-
-            slidesContainer.setAttribute('data-current-slide', 2);
+            completeSlide2();
         }
     }
 
@@ -109,8 +141,6 @@ export default function(stravaToolkit, renderLocation, statObject) {
 
             statObject.filters = [];
 
-            console.log(statObject.filters)
-
             Array.from(filters).forEach(function(filter) {
                 if (!filter.hasAttribute('hidden')) {
                     let newFilter = {};
@@ -121,8 +151,6 @@ export default function(stravaToolkit, renderLocation, statObject) {
                     statObject.filters.push(newFilter);
                 }
             });
-            console.log(statObject.filters)
-
 
             statObject.data = createFilteredData(stravaToolkit, statObject);
 
@@ -144,6 +172,7 @@ export default function(stravaToolkit, renderLocation, statObject) {
     slides(modalBody, slidesConfig);
 
     const slidesContainer = modalBody.querySelector('[data-role="slides-container"]');
+    const slidesTimeline = modalBody.querySelector('[data-role="slides-timeline"]');
     const formSlides = slidesContainer.querySelectorAll('[data-role="slide"]');
 
     firstSlide();

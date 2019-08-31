@@ -6,34 +6,53 @@ import updateActivity from '../../update-activity';
 import pagination from '../../pagination';
 import loadingScreen from '../../loading-screen';
 import hideLoadingScreen from '../../../utils/hide-loading-screen';
+import activitiesFilter from '../../activities-filter';
 
 export default async function(stravaToolkit, rootElement, page) {
 
-    const activitiesFilter = rootElement.querySelector('[data-role="activities-filter"]');
-    const activitiesContent = rootElement.querySelector('[data-role="activities-content"]');
-    const activitiesFooter = rootElement.querySelector('[data-role="activities-footer"]');
+    const activitiesFilterPanel = rootElement.querySelector('[data-role="activities-filter"]');
+    const activitiesContentPanel = rootElement.querySelector('[data-role="activities-content"]');
+    const activitiesFooterPanel = rootElement.querySelector('[data-role="activities-footer"]');
 
-    function activitiesTable(data) {
-        const tableHeadings = [
-            'Sport',
-            'Date',
-            'Title',
-            'Time',
-            'Distance',
-            'Elevation'
-        ];
+    async function applyFilters() {
+        defaults.total = activitiesFilterPanel.querySelector('[name="number"]').value;
 
-        let tableConfig = {}
+        await getActivitiesData(stravaToolkit, rootElement, defaults.total, defaults.perPage)
+        .then(function(data) {
+            let activityData = data;
 
-        tableConfig.data = createTableData(stravaToolkit, tableHeadings, data);
-        tableConfig.modifiers = 'data-table--clickable-rows';
+            activityData = filteredActivitiesData(data);
 
-        dataTable(activitiesContent, tableConfig);
+            localStorage.setItem('stravaToolkitActivities', JSON.stringify(activityData));
+
+            renderPage(activityData);
+        });
+    }
+
+    function populateFiltersPanel() {
+        const activitiesFilterConfig = {
+            render: 'afterbegin',
+            filters: filtersObject
+        };
+        
+        activitiesFilter(activitiesFilterPanel, activitiesFilterConfig);
+
+        const applyFiltersButton = activitiesFilterPanel.querySelector('[data-role="submit"]');
+
+        applyFiltersButton.onclick = function(e) {
+            e.preventDefault();
+
+            applyFilters();
+
+            window.location = '#activities';
+
+            page = 1;
+        }
     }
 
     function tableRowEvents() {
 
-        const table = activitiesContent.querySelector('[data-component-name="data-table"]');
+        const table = activitiesContentPanel.querySelector('[data-component-name="data-table"]');
         const tableRows = table.querySelectorAll('[data-role="table-row"]');
 
         let modalConfig = {};
@@ -58,25 +77,99 @@ export default async function(stravaToolkit, rootElement, page) {
         });
     }
 
-    const loadingScreenConfig = {
-        message: 'Loading activities...'
+    function activitiesTable(data) {
+        activitiesContentPanel.innerHTML = '';
+
+        const tableHeadings = [
+            'Route',
+            'Sport',
+            'Date',
+            'Title',
+            'Time',
+            'Distance',
+            'Elevation'
+        ];
+
+        let tableConfig = {}
+
+        tableConfig.data = createTableData(stravaToolkit, tableHeadings, data);
+        tableConfig.modifiers = 'data-table--clickable-rows';
+
+        dataTable(activitiesContentPanel, tableConfig);
+        tableRowEvents();
     }
 
-    loadingScreen(activitiesContent, loadingScreenConfig);
+    function addPagination(total) {
+        activitiesFooterPanel.innerHTML = '';
 
-    await getActivitiesData(stravaToolkit, rootElement, 30, 30, page)
-    .then(function(data) {
-        hideLoadingScreen(stravaToolkit);
-        activitiesTable(data);
-        tableRowEvents();
+        if (total <= defaults.perPage) {
+            return;
+        }
 
         let paginationConfig = {};
 
-        paginationConfig.pages = Math.ceil((stravaToolkit.view.statsData.all_ride_totals.count + stravaToolkit.view.statsData.all_run_totals.count) / 30);
+        paginationConfig.pages = Math.ceil(total / defaults.perPage);
         paginationConfig.currentPage = page;
         paginationConfig.rootUrl = '#activities';
 
-        pagination(activitiesFooter, paginationConfig); 
-    });
+        pagination(activitiesFooterPanel, paginationConfig); 
+    }
+
+    function filteredActivitiesData(data) {
+        const activitiesFilterConfig = {
+            activities: data
+        };
+
+        return activitiesFilter(activitiesFilterPanel, activitiesFilterConfig);
+    }
+
+    async function getActivities() {
+        await getActivitiesData(stravaToolkit, rootElement, defaults.total, defaults.perPage)
+        .then(function(data) {
+            let activitiesData = data;
+
+            if (filtersObject) {
+                activitiesData = filteredActivitiesData(data);
+            }
+
+            localStorage.setItem('stravaToolkitActivities', JSON.stringify(activitiesData));
+
+            renderPage(activitiesData);
+        });
+    }
+
+    function getPage(data) {
+        return data.slice((page-1)*defaults.perPage, page*defaults.perPage);
+    }
+
+    function renderPage(data) {
+        const displayData = getPage(data);
+        activitiesTable(displayData);
+        addPagination(data.length);
+        hideLoadingScreen(stravaToolkit);
+    }
+
+    const loadingScreenConfig = {
+        message: 'Loading activities...'
+    }
+    loadingScreen(rootElement, loadingScreenConfig);
+
+    let defaults = {
+        total: 100,
+        perPage: 25
+    }
+
+    const filtersObject = JSON.parse(localStorage.getItem('stravaToolkitActivitiesFilter'));
+    const storedActivities = JSON.parse(localStorage.getItem('stravaToolkitActivities'));
+
+    populateFiltersPanel();
+
+    defaults.total = activitiesFilterPanel.querySelector('[name="number"]').value;
+
+    if (storedActivities) {
+        renderPage(storedActivities);
+    } else {
+        getActivities();
+    }
     
 }

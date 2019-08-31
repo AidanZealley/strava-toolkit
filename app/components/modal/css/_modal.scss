@@ -25,6 +25,7 @@
     background: #fff;
     transition: transform 0.166s ease;
     overflow: auto;
+    overscroll-behaviour: contain;
 }
 
 .modal[hidden] .modal__inner {

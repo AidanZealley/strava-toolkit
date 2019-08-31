@@ -23,39 +23,27 @@ export default function(stravaToolkit, statObject) {
         };
     }
 
-    let filteredActivities = [];
+    let filteredActivities = stravaToolkit.view.activitiesData.slice(0);
 
     if (statObject.filters.length > 0) {
-        // For each filter loop through and add matching activities to filteredActivities 
         statObject.filters.forEach(function(filter) {
-            stravaToolkit.view.activitiesData.forEach(function(activity) {
-                let match = false;
-
+            filteredActivities = filteredActivities.filter(function(activity) {
                 if (typeof filter.value == 'string') {
-                    if (activity[filter.field] == filter.value || activity[filter.field].toLowerCase().includes(filter.value.toLowerCase())) {
-                        match = true;
-                    }
-                } else if (activity[filter.field] == filter.value) {
-                    match = true;
+                    return activity[filter.field].toLowerCase().includes(filter.value.toLowerCase());
+                } else {
+                    return activity[filter.field] == filter.value;
                 }
-                
-                if (match) {
-                    filteredActivities.push(activity);
-                }
-            });
+            })
         });
-    } else {
-        filteredActivities = stravaToolkit.view.activitiesData;
     }
 
-    // Sort filteredActivities in chosen direction
     filteredActivities.sort(compareValues(statObject.field, statObject.order));
 
     let statData = [];
 
     for (let i = 0; i < statObject.limit; i++) {
         if (filteredActivities[i]) {
-            statData.push(filteredActivities[i][statObject.field]);
+            statData.push(filteredActivities[i]);
         }
     }
 

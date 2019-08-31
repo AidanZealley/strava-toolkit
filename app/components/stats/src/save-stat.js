@@ -1,4 +1,4 @@
-export default function(statObject) {
+export default function(statObject, remove) {
 
     let stravaToolkitStats = JSON.parse(localStorage.getItem('stravaToolkitStats'));
 
@@ -12,7 +12,11 @@ export default function(statObject) {
         if (storedStat.id == statObject.id) {
             foundMatchingStat = true;
 
-            stravaToolkitStats[index] = statObject;
+            if (remove) {
+                stravaToolkitStats.splice(index, 1);
+            } else {
+                stravaToolkitStats[index] = statObject;
+            }
         }
     });
 

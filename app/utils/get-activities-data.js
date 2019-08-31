@@ -1,25 +1,25 @@
 import updateProgressBar from './update-progress-bar';
 
-export default async function(stravaToolkit, rootElement, number, perPage, page) {
+export default async function(stravaToolkit, rootElement, total, perPage) {
 
     const progressBar = rootElement.querySelector('[data-role="progress-bar"]');
 
-    stravaToolkit.view.activitiesData = [];
+    let activitiesData = [];
 
-    if (!number) {
-        number = stravaToolkit.view.statsData.all_ride_totals.count + stravaToolkit.view.statsData.all_run_totals.count;
+    if (!total) {
+        total = 30;
     }
 
     if (!perPage) {
-        perPage = 50;
+        perPage = 30;
     }
 
     function generatePageUrls() {
-        const pages = Math.ceil(number / perPage);
+        const pages = Math.ceil(total / perPage);
         let urls = [];
 
         for (let i = 0; i < pages; i++) {
-            urls.push('https://www.strava.com/api/v3/athlete/activities?before=' + Date.now() + '&page=' + (page ? page : i+1) + '&per_page=' + perPage + '&access_token=' + stravaToolkit.view.oauthData.access_token)
+            urls.push('https://www.strava.com/api/v3/athlete/activities?before=' + Date.now() + '&page=' + (i+1) + '&per_page=' + perPage + '&access_token=' + stravaToolkit.view.oauthData.access_token)
         }
 
         return urls;
@@ -39,10 +39,14 @@ export default async function(stravaToolkit, rootElement, number, perPage, page)
         for (let [index, pageUrl] of pageUrls.entries()) {
             let data = await requestPage(pageUrl)
 
-            stravaToolkit.view.activitiesData = stravaToolkit.view.activitiesData.concat(data)
+            activitiesData = activitiesData.concat(data)
 
             if (progressBar) {
                 updateProgressBar(progressBar, index + 1, pageUrls.length, false);
+            }
+
+            if (data.length < perPage) {
+                break;
             }
         }
 
@@ -50,7 +54,9 @@ export default async function(stravaToolkit, rootElement, number, perPage, page)
             updateProgressBar(progressBar, pageUrls.length, pageUrls.length, true);
         }
 
-        return stravaToolkit.view.activitiesData;
+        console.log(activitiesData)
+
+        return activitiesData;
     }
 
     return await requestPages(generatePageUrls());

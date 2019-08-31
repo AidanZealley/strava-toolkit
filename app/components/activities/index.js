@@ -7,6 +7,7 @@ export default function(stravaToolkit, renderLocation, params) {
             <div class="progress-bar" data-role="progress-bar" hidden><div class="progress-bar__indicator" data-role="progress-bar-indicator"></div></div>
 
             <div class="activities__filter" data-role="activities-filter">
+                <button class="button button--right" data-role="submit">Apply</button>
             </div>
 
             <div class="activities__content" data-role="activities-content">

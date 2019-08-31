@@ -1,0 +1,26 @@
+.cols {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.cols__col {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 1em;
+}
+
+.cols__col > * {
+    flex: 1 0 100%;
+}
+
+.cols__col--1 {
+    flex: 1 0 100%;
+}
+
+.cols__col--2 {
+    flex: 1 1 50%;
+}
+
+.cols__col--3 {
+    flex: 1 1 33%;
+}

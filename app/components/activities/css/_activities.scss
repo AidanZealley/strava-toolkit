@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     height: 100%;
+    position: relative;
 }
 
 .activities .progress-bar {
@@ -18,7 +19,7 @@
 }
 
 .activities__filter {
-
+    position: relative;
 }
 
 .activities__content {
